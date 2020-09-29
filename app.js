@@ -88,6 +88,7 @@ function launchQuiz() {
     renderQuiz();
     chooseAnswer();
     clickSubmit();
+    clickNext()
   })
 }
 
@@ -136,13 +137,18 @@ function increaseCorrectCount() {
   $('.running-score').text(`You have answered ${correctCount} of ${n+1} questions correctly.`);
 }
 
+function clickNext() {
+  $('body').on('click', '#next-question-btn', function(event) {
+    console.log('tada');
+  })
+}
+
 
 
 
 function initializePage() {
   renderWelcome();
   launchQuiz();
-
 }
 
 $(initializePage)
