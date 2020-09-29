@@ -34,7 +34,7 @@ function genWelcome() {
 }
 
 function genQuiz() {
-  getCurrentAnswers();               /* I need to figure out a way to get this to re-run every time the question is updated. */
+  getCurrentAnswers();
   return `<section class="quiz-box">
             
 
@@ -51,7 +51,7 @@ function genQuiz() {
                 </div>
                 <div class="quiz-buttons">
                   <button type="submit" id="submit-answer-btn">Submit Answer</button>
-                  <button type="button" id="next-question-btn">Next Question</button>
+                  <button type="button" id="next-question-btn" class="btn-hide">Next Question</button>
                 </div>
               </fieldset>
             </form >
@@ -88,7 +88,7 @@ function launchQuiz() {
     renderQuiz();
     chooseAnswer();
     clickSubmit();
-    clickNext()
+    clickNext();
   })
 }
 
@@ -129,7 +129,10 @@ function clickSubmit() {
         $(`#${choice}`).addClass('wrong-answer');
       }
     }
+    $('#next-question-btn').removeClass('btn-hide');
     increaseCorrectCount();
+    n++;
+    console.log(quiz.length)
   })
 }
 
@@ -139,6 +142,9 @@ function increaseCorrectCount() {
 
 function clickNext() {
   $('body').on('click', '#next-question-btn', function(event) {
+    if (n<quiz.questions.length){
+      genQuiz();
+    }
     console.log('tada');
   })
 }

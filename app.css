@@ -42,6 +42,10 @@ h4 {
   min-height: 90px;
 }
 
+.btn-hide {
+  visibility: hidden;
+}
+
 #quiz-main * {                          /* this can probably be removed from the production version */
 }
 
