@@ -17,6 +17,14 @@
 
 let n = 0;
 let currAnswers = [];
+let correctCount = 0;
+let numCorrect = 0;
+
+function getCurrentAnswers() {
+  currAnswers = quiz.questions[n].answers;
+  console.log(currAnswers);
+  return currAnswers;
+}
 
 function genWelcome() {
   return `<section class="quiz-box">
@@ -51,15 +59,9 @@ function genQuiz() {
 
           </section>
           <section>
-            <p>You have answered # out of # questions correctly.</p>
-            <p>There are ${10 - n} questions remaining.</p>
+            <p class="running-score">You have answered ${numCorrect} out of 0 questions correctly.</p>
+            <p>There are ${10-n} questions remaining.</p>
           </section>`;
-}
-
-function getCurrentAnswers() {
-  currAnswers = quiz.questions[n].answers;
-  console.log(currAnswers);
-  return currAnswers;
 }
 
 
@@ -84,6 +86,8 @@ function launchQuiz() {
   $('body').on('click', '#start-btn', function (event) {
     quiz.quizStarted = true;
     renderQuiz();
+    chooseAnswer();
+    clickSubmit();
   })
 }
 
@@ -107,21 +111,38 @@ function clickSubmit() {
   $('body').on('submit', '#quiz-form', function(event) {
     event.preventDefault();
     let x = $('.selected-answer');
-    
+    $('.answer-choice').prop('disabled', true)
+    $(this).find(':button[type=submit]').prop('disabled', true)
     if (x.text() === quiz.questions[n].correctAnswer) {
-      console.log ('hooray')
+      correctCount ++;
+      console.log(correctCount)
     } else {
       console.log('boo')
     }
-    
+    $(this).find('.answer-choice')
+    for (i=1; i<=4; i++) {
+      let choice = 'choice' + i;
+      if ($(`#${choice}`).text() === quiz.questions[n].correctAnswer) {
+        $(`#${choice}`).addClass('correct-answer');
+      } else {
+        $(`#${choice}`).addClass('wrong-answer');
+      }
+    }
+    increaseCorrectCount();
   })
 }
+
+function increaseCorrectCount() {
+  $('.running-score').text(`You have answered ${correctCount} of ${n+1} questions correctly.`);
+}
+
+
+
 
 function initializePage() {
   renderWelcome();
   launchQuiz();
-  chooseAnswer();
-  clickSubmit();
+
 }
 
 $(initializePage)
