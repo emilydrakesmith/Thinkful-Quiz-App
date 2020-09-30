@@ -27,12 +27,32 @@ h4 {
   align-self: center;
 }
 
+fieldset {
+  border: none;
+}
+
 .quiz-box {
   display: flex;
   flex-direction: column;
   background-color: #d8d8d8;
   border-radius: 5px;
   min-height: 425px;
+  max-width: 500px;
+}
+
+.quiz-box * {
+}
+
+.question {
+  min-height: 175px;;
+}
+
+.answer-border {
+  border: 5px solid #ff8500;
+}
+
+.question h3 {
+  margin: 0px 10px 0px 10px;
 }
 
 #start-btn {
@@ -42,29 +62,26 @@ h4 {
   min-height: 90px;
 }
 
-.btn-hide {
+.hide {
   visibility: hidden;
 }
 
-#quiz-main * {                          /* this can probably be removed from the production version */
-}
-
-ol {
+.answers {
   display: flex;
   flex-direction: column;
   list-style-type: none;
   padding: 0px;                         /* this is necessary to override browser defaults */
   gap: 10px;
   justify-content: space-between;
-  margin: 10px;
+  min-width: 295px;
   max-width: 700px;
+  margin-bottom: 15px;
 }
 
 .raw-answer {
   display: flex;
   align-items: center;
   padding: 10px;
-  height: 75px;
   font-size: 16px;
   font-style: bold;
   background-color: #333333;
@@ -76,11 +93,10 @@ ol {
   display: flex;
   align-items: center;
   padding: 10px;
-  height: 75px;
   font-size: 16px;
   font-style: bold;
   background-color: #333333;
-  color: #34DBDB;
+  color: #ff8500;
   border-radius: 5px;
 }
 
@@ -88,7 +104,6 @@ ol {
   display: flex;
   align-items: center;
   padding: 10px;
-  height: 75px;
   font-size: 16px;
   font-style: bold;
   background-color: #1a4301;
@@ -100,7 +115,6 @@ ol {
   display: flex;
   align-items: center;
   padding: 10px;
-  height: 75px;
   font-size: 16px;
   font-style: bold;
   background-color: #660708;
